@@ -463,7 +463,7 @@ input.invalid{border-color:var(--error)}
             </label>
             <label class="plan-card" id="pc-3m" onclick="selectPlanCard('plano','3 meses','pc-3m','pc-6m','pc-1m');onPlano()">
               <input type="radio" name="plano" value="3 meses">
-              <div class="plan-price">R$ 397/497</div>
+              <div class="plan-price">R$ 497</div>
               <div class="plan-label">3 meses</div>
             </label>
             <label class="plan-card" id="pc-1m" onclick="selectPlanCard('plano','1 mês','pc-1m','pc-6m','pc-3m');onPlano()">
@@ -885,14 +885,14 @@ function onPlano(){
   const wrapFixo=document.getElementById('valor-fixo-wrap');
   const display=document.getElementById('valor-fixo-display');
   if(plano==='6 meses'){wrap3m.style.display='none';wrapFixo.style.display='block';display.textContent='R$ 697';}
-  else if(plano==='3 meses'){wrap3m.style.display='block';wrapFixo.style.display='none';document.querySelectorAll('input[name=valor-3m]').forEach(r=>r.checked=false);document.querySelectorAll('.valor-card').forEach(c=>c.classList.remove('checked'));}
+  else if(plano==='3 meses'){wrap3m.style.display='none';wrapFixo.style.display='block';display.textContent='R$ 497';}
   else if(plano==='1 mês'){wrap3m.style.display='none';wrapFixo.style.display='block';display.textContent='R$ 247';}
   else{wrap3m.style.display='none';wrapFixo.style.display='none';}
 }
 function getValor(){
   const plano=document.querySelector('input[name=plano]:checked')?.value;
   if(plano==='6 meses')return'697';if(plano==='1 mês')return'247';
-  if(plano==='3 meses'){const v=document.querySelector('input[name=valor-3m]:checked')?.value;return v||'';}
+  if(plano==='3 meses')return'497';
   return'';
 }
 
@@ -932,7 +932,7 @@ function gerarMensagens(){
   if(tipo==='casa'){if(!get('logradouro'))errors.push('Logradouro obrigatório');if(!get('numero'))errors.push('Número do endereço obrigatório');if(!get('cidade'))errors.push('Cidade obrigatória');if(!get('cep'))errors.push('CEP obrigatório');}
   if(tipo==='correios'){if(!get('logradouro-cr'))errors.push('Logradouro da agência obrigatório');if(!get('numero-cr'))errors.push('Número da agência obrigatório');if(!get('cidade-cr'))errors.push('Cidade obrigatória');if(!get('cep-cr'))errors.push('CEP da agência obrigatório');}
   if(!document.querySelector('input[name=plano]:checked'))errors.push('Selecione o plano');
-  if(!getValor())errors.push('Selecione o valor (R$ 397 ou R$ 497 para 3 meses)');
+  if(!getValor())errors.push('Selecione o plano e o valor');
   if(!document.querySelector('input[name=pagamento]:checked'))errors.push('Selecione a forma de pagamento');
   const prazoTipo=document.querySelector('input[name=prazo-tipo]:checked')?.value;
   if(prazoTipo==='data'&&!document.getElementById('prazo-data-input').value)errors.push('Informe a data específica de pagamento');
